@@ -1,0 +1,13 @@
+.top-safe{
+  padding-top:  var(--status-bar-height) ;//给组件加个上边距w
+}
+.wrapper{
+  background: rgba(240,240,240,.4);
+  min-height: 100vh;
+  padding: 0 0 16rpx;
+  box-sizing: border-box;
+}
+
+.u-navbar{
+  box-shadow: 0 2px 8px rgba(240, 240, 240, .4);
+}
