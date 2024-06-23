@@ -4,6 +4,7 @@ import { onShow } from "@dcloudio/uni-app";
 import dayjs from "dayjs";
 import { ref } from "vue";
 import { addClock, clockStatus } from "@/api";
+import _ from "lodash";
 
 const uToastRef = ref(null);
 
@@ -28,7 +29,7 @@ const findStatus = async () => {
 };
 
 // 记录时间
-const recordsTime = async () => {
+const recordsTime = _.debounce(async () => {
   try {
     uni.getLocation({
       async success({ longitude, latitude }) {
@@ -59,7 +60,7 @@ const recordsTime = async () => {
       },
     });
   } catch (error) {}
-};
+}, 500);
 
 onShow(() => {
   setInterval(() => {
