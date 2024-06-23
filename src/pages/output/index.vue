@@ -42,9 +42,11 @@ const getInfo = async () => {
   } catch (error) {}
 };
 
+// 切换状态
 const checkType = (type) => {
   params.value.type = type;
   data.value.list = []
+  params.value.page = 1
   getInfo();
 };
 </script>

@@ -1,4 +1,4 @@
-const baseUrl = "http://47.104.212.175:8081/api/v1"
+const baseUrl = import.meta.env.VITE_API_URL + "/api/v1"
 // const baseUrl = "/api/v1"
 
 export const request = ({url,method,data}) => {

@@ -23,11 +23,6 @@ onReachBottom(() => {
   params.value.page++;
   getInfo();
 });
-// 下拉加载
-onPullDownRefresh(() => {
-  params.value.page++;
-  getInfo();
-});
 
 const goUrl = (url) => {
   uni.navigateTo({

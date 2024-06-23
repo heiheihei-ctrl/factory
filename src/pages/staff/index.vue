@@ -1,5 +1,5 @@
 <script setup>
-import { onShow, onReachBottom } from "@dcloudio/uni-app";
+import { onShow, onReachBottom, onHide } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import { getAllUser } from "@/api";
 
@@ -16,6 +16,11 @@ let uToastRef = ref(null);
 onShow(() => {
   getInfo();
 });
+// 离开页面初始化数据
+onHide(() => {
+  data.value.list = []
+  params.value.page = 1
+})
 
 // 触底刷新
 onReachBottom(() => {

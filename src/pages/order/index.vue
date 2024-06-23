@@ -1,12 +1,12 @@
 <script setup>
-import { onShow } from "@dcloudio/uni-app";
+import { onShow,onHide,onReachBottom } from "@dcloudio/uni-app";
 import { ref, reactive } from "vue";
 import { getOrder } from "@/api";
 import Card from "@/components/card";
 
 const params = ref({
   page: 1,
-  limit: 10,
+  limit: 6,
   type: "",
 });
 const data = ref({
@@ -17,12 +17,22 @@ const data = ref({
 onShow(() => {
   getInfo();
 });
+// 离开页面初始化数据
+onHide(() => {
+  data.value.list = []
+  params.value.page = 1
+})
+// 触底刷新
+onReachBottom(() => {
+  params.value.page++;
+  getInfo();
+});
 
 const getInfo = async () => {
   try {
     const result = await getOrder(params.value);
     if (result.code === 200) {
-      data.value.list = result.data.list;
+      data.value.list = [...data.value.list, ...result.data.list];
       data.value.total = result.data.total;
     }
   } catch (error) {}

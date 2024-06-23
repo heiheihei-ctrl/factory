@@ -1,5 +1,5 @@
 <script setup>
-import { onShow } from "@dcloudio/uni-app";
+import { onShow,onReachBottom } from "@dcloudio/uni-app";
 import Tabbar from "@/components/tabbar";
 import { ref } from "vue";
 import { getOrder } from "@/api";
@@ -7,7 +7,7 @@ import Card from "@/components/card"
 
 const params = ref({
   page: 1,
-  limit: 10,
+  limit: 5,
   type: "UNDERWAY",
 });
 const list = ref([])
@@ -24,12 +24,17 @@ onShow(() => {
   });
   getInfo()
 });
+// 触底刷新
+onReachBottom(() => {
+  params.value.page++;
+  getInfo();
+});
 
 const getInfo = async () => {
   try {
     const result = await getOrder(params.value)
     if(result.code === 200){
-      list.value = result.data.list
+      list.value = [...list.value,...result.data.list];
     }
   } catch (error) {
     
@@ -37,6 +42,8 @@ const getInfo = async () => {
 };
 const checkInfo = (type) => {
   params.value.type = type
+  list.value = []
+  params.value.page = 1
   getInfo()
 }
 </script>

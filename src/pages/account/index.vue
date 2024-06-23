@@ -7,7 +7,7 @@ import { ref } from "vue";
 const info = ref({});
 const role = ref("");
 let uToastRef = ref(null);
-let baseUrl = "http://cow.czjscktd.com/staff/";
+let baseUrl = import.meta.env.VITE_QINIU_URL;
 
 const noOpen = () => {
   uToastRef.value.show({

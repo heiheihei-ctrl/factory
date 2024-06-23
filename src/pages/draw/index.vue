@@ -13,6 +13,8 @@ const data = ref({
   total:0
 })
 
+const baseUrl = import.meta.env.VITE_QINIU_PDF
+
 onShow(() => {
   getInfo()
 });
@@ -42,7 +44,7 @@ const getInfo = async () => {
 
 const goFile = (file) => {
   uni.downloadFile({
-    url: `http://cow.czjscktd.com/factory/${file}`,
+    url: `${baseUrl}/${file}`,
     success: function (res) {
       var filePath = res.tempFilePath;
       uni.openDocument({
